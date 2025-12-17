@@ -1,0 +1,288 @@
+/* Profile Page Styles - Clubhouse Design */
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 4px;
+  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+  border-radius: 50%;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #FFFFFF;
+  padding: 2px;
+}
+
+.profile-avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E9D5FF 0%, #DDD6FE 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 600;
+  color: #8B5CF6;
+}
+
+.profile-username {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.profile-email {
+  font-size: 15px;
+  color: #6B7280;
+  margin-bottom: 20px;
+}
+
+.profile-edit-button {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8B5CF6;
+  background: transparent;
+  border: 2px solid #8B5CF6;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-edit-button:hover {
+  background: #8B5CF6;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+}
+
+.profile-edit-button:active {
+  transform: translateY(0);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.profile-stat-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.profile-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.profile-stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.profile-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #8B5CF6;
+  line-height: 1;
+}
+
+.profile-section {
+  margin-bottom: 32px;
+}
+
+.profile-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.profile-debates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-debate-item {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 56px;
+}
+
+.profile-debate-item::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-debate-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.profile-debate-icon {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.profile-debate-content {
+  flex: 1;
+}
+
+.profile-debate-topic {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.profile-debate-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.profile-debate-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.profile-debate-status.won {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.profile-debate-status.lost {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+}
+
+.profile-debate-status.pending {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+}
+
+.profile-debate-timestamp {
+  font-size: 12px;
+  color: #9CA3AF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px 16px;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .profile-stat-card {
+    padding: 20px 16px;
+  }
+
+  .profile-stat-value {
+    font-size: 28px;
+  }
+
+  .profile-debate-item {
+    padding-left: 48px;
+  }
+
+  .profile-debate-icon {
+    left: 16px;
+    top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-avatar-wrapper {
+    padding: 3px;
+  }
+
+  .profile-avatar,
+  .profile-avatar-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-avatar-placeholder {
+    font-size: 40px;
+  }
+
+  .profile-username {
+    font-size: 24px;
+  }
+
+  .profile-section-title {
+    font-size: 18px;
+  }
+}
+

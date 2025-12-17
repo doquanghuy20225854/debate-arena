@@ -1,0 +1,553 @@
+/* Create Room Page Styles - Clubhouse Design */
+
+.create-room-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 200px);
+  padding: 32px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.create-room-card {
+  width: 100%;
+  max-width: 600px;
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 40px;
+  position: relative;
+}
+
+/* Step Indicator */
+.create-room-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.create-room-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9CA3AF;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.create-room-step.active {
+  color: #8B5CF6;
+  font-weight: 600;
+}
+
+.create-room-step.completed {
+  color: #10B981;
+}
+
+.create-room-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #F3F4F6;
+  color: #9CA3AF;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.create-room-step.active .create-room-step-number {
+  background: #8B5CF6;
+  color: #FFFFFF;
+}
+
+.create-room-step.completed .create-room-step-number {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.create-room-step-arrow {
+  margin: 0 8px;
+  color: #D1D5DB;
+  font-size: 18px;
+}
+
+/* Progress Bar */
+.create-room-progress {
+  height: 3px;
+  background: #F3F4F6;
+  border-radius: 2px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.create-room-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #8B5CF6 0%, #6366F1 100%);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Step Content */
+.create-room-step-content {
+  min-height: 400px;
+}
+
+.create-room-step-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+/* Step 1 - Topic Selection */
+.create-room-search {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.create-room-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  font-size: 15px;
+  color: #111827;
+  background: #FFFFFF;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.create-room-search-input:focus {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.create-room-search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #9CA3AF;
+  pointer-events: none;
+}
+
+.create-room-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.create-room-topic-card {
+  background: #FFFFFF;
+  border: 2px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.create-room-topic-card:hover {
+  border-color: #8B5CF6;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+
+.create-room-topic-card.selected {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: #8B5CF6;
+}
+
+.create-room-topic-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.create-room-topic-category {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+  margin-bottom: 12px;
+}
+
+.create-room-topic-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.create-room-topic-description {
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.create-room-topic-meta {
+  font-size: 12px;
+  color: #9CA3AF;
+}
+
+.create-room-random-topic {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.create-room-random-topic-button {
+  background: none;
+  border: none;
+  color: #8B5CF6;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.3s ease;
+}
+
+.create-room-random-topic-button:hover {
+  color: #7C3AED;
+}
+
+/* Step 2 - Configuration */
+.create-room-config-group {
+  margin-bottom: 32px;
+}
+
+.create-room-config-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.create-room-radio-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.create-room-radio-option {
+  flex: 1;
+  position: relative;
+}
+
+.create-room-radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.create-room-radio-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+  background: #FFFFFF;
+}
+
+.create-room-radio-input:checked + .create-room-radio-label {
+  border-color: #8B5CF6;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+  font-weight: 600;
+}
+
+.create-room-room-code {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(139, 92, 246, 0.05);
+  border: 2px dashed #C4B5FD;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.create-room-room-code-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.create-room-room-code-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #8B5CF6;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+.create-room-slider-group {
+  margin-bottom: 24px;
+}
+
+.create-room-slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.create-room-slider-label-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+.create-room-slider-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8B5CF6;
+}
+
+.create-room-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #E5E7EB;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.create-room-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #8B5CF6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+  transition: all 0.2s ease;
+}
+
+.create-room-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.4);
+}
+
+.create-room-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #8B5CF6;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+  transition: all 0.2s ease;
+}
+
+.create-room-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.4);
+}
+
+/* Step 3 - Preview */
+.create-room-preview {
+  background: linear-gradient(135deg, #F3E8FF 0%, #DBEAFE 100%);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.create-room-preview-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 24px;
+}
+
+.create-room-preview-item {
+  margin-bottom: 20px;
+}
+
+.create-room-preview-item:last-child {
+  margin-bottom: 0;
+}
+
+.create-room-preview-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.create-room-preview-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.create-room-preview-code {
+  font-size: 28px;
+  font-weight: 700;
+  color: #8B5CF6;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+/* Navigation Buttons */
+.create-room-navigation {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.create-room-button {
+  flex: 1;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.create-room-button.primary {
+  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.create-room-button.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+}
+
+.create-room-button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.create-room-button.secondary {
+  background: transparent;
+  color: #6B7280;
+  border: 2px solid #E5E7EB;
+}
+
+.create-room-button.secondary:hover {
+  border-color: #9CA3AF;
+  color: #1F2937;
+}
+
+.create-room-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.create-room-loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-room-card {
+    padding: 32px 24px;
+  }
+
+  .create-room-steps {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .create-room-step-arrow {
+    display: none;
+  }
+
+  .create-room-topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .create-room-radio-group {
+    flex-direction: column;
+  }
+
+  .create-room-navigation {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-room-container {
+    padding: 20px 16px;
+  }
+
+  .create-room-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .create-room-step-title {
+    font-size: 20px;
+  }
+}
+
