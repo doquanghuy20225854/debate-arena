@@ -1,0 +1,118 @@
+/* LoadingButton Component Styles */
+
+.loading-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  font-family: inherit;
+}
+
+.loading-button:focus-visible {
+  outline: 2px solid var(--color-primary-start);
+  outline-offset: 2px;
+}
+
+.loading-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Variants */
+.loading-button-primary {
+  background: linear-gradient(135deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.loading-button-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.loading-button-secondary {
+  background: var(--color-secondary);
+  color: #ffffff;
+}
+
+.loading-button-secondary:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.loading-button-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary-start);
+  color: var(--color-primary-start);
+}
+
+.loading-button-outline:hover:not(:disabled) {
+  background: var(--color-primary-start);
+  color: #ffffff;
+}
+
+/* Sizes */
+.loading-button-sm {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.loading-button-md {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.loading-button-lg {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+
+/* Loading state */
+.loading-button-spinner {
+  display: inline-flex;
+  align-items: center;
+  animation: fade-in 0.2s ease-out;
+}
+
+.loading-button-text-loading {
+  opacity: 0.8;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Alternative: Use existing button classes with loading prop */
+.ds-button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.ds-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
