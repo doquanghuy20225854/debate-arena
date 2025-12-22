@@ -4,8 +4,8 @@
 
 **Debate Arena** là một ứng dụng web cho phép người dùng tạo và tham gia các cuộc tranh luận trực tuyến theo thời gian thực. Dự án được xây dựng với kiến trúc **Full-Stack**:
 
-- **Frontend**: React + TypeScript (Port 3001)
-- **Backend**: NestJS + TypeScript (Port 3000)
+- **Frontend**: React + JavaScript (Port 3001)
+- **Backend**: NestJS + JavaScript (Port 3000)
 - **Database**: MySQL
 - **Real-time**: Socket.IO
 
@@ -25,7 +25,7 @@ debate-arena/
 ## 🎨 Frontend (`/frontend`)
 
 ### Công Nghệ
-- **React 19** với TypeScript
+- **React 19** với JavaScript
 - **React Router** cho routing
 - **Axios** cho HTTP requests
 - **Socket.IO Client** cho real-time
@@ -36,8 +36,8 @@ debate-arena/
 
 ```
 frontend/src/
-├── App.tsx                    # Main app component với routing
-├── index.tsx                  # Entry point, setup providers
+├── App.jsx                    # Main app component với routing
+├── index.jsx                  # Entry point, setup providers
 │
 ├── pages/                     # Các trang chính
 │   ├── Home.jsx              # Trang chủ - danh sách rooms
@@ -48,29 +48,29 @@ frontend/src/
 │   ├── JoinRoom.jsx          # Tham gia phòng
 │   ├── RoomLobby.jsx         # Phòng chờ trước khi debate
 │   ├── DebateRoom.jsx        # Màn hình debate chính
-│   └── ResultScreen.tsx      # Màn hình kết quả
+│   └── ResultScreen.jsx      # Màn hình kết quả
 │
 ├── components/                # React Components
 │   ├── layout/               # Layout components
-│   │   ├── Navbar.tsx       # Navigation bar
-│   │   └── PageWrapper.tsx  # Wrapper cho pages
+│   │   ├── Navbar.jsx       # Navigation bar
+│   │   └── PageWrapper.jsx  # Wrapper cho pages
 │   │
 │   ├── ui/                   # UI Components (33 files)
-│   │   ├── Button.tsx       # Button component
-│   │   ├── Card.tsx         # Card component
-│   │   ├── Modal.tsx        # Modal dialog
-│   │   ├── Input.tsx        # Input field
-│   │   ├── Spinner.tsx      # Loading spinner
-│   │   ├── Toast.tsx        # Toast notification
+│   │   ├── Button.jsx       # Button component
+│   │   ├── Card.jsx         # Card component
+│   │   ├── Modal.jsx        # Modal dialog
+│   │   ├── Input.jsx        # Input field
+│   │   ├── Spinner.jsx      # Loading spinner
+│   │   ├── Toast.jsx        # Toast notification
 │   │   ├── Timer.jsx        # Debate timer
 │   │   ├── VotingPanel.jsx  # Voting interface
 │   │   ├── DebaterPanel.jsx # Debater info panel
 │   │   ├── TurnIndicator.jsx # Turn indicator
-│   │   ├── RaiseHand.tsx    # Raise hand component
-│   │   ├── RaisedHandsList.tsx # Questions list
-│   │   ├── PageLoader.tsx   # Full screen loader
-│   │   ├── LoadingButton.tsx # Button với loading state
-│   │   └── RoomCardSkeleton.tsx # Skeleton loader
+│   │   ├── RaiseHand.jsx    # Raise hand component
+│   │   ├── RaisedHandsList.jsx # Questions list
+│   │   ├── PageLoader.jsx   # Full screen loader
+│   │   ├── LoadingButton.jsx # Button với loading state
+│   │   └── RoomCardSkeleton.jsx # Skeleton loader
 │   │
 │   ├── auth/                 # Auth components
 │   │   └── AuthLayout.jsx   # Layout cho auth pages
@@ -79,21 +79,21 @@ frontend/src/
 │       └── ComponentTemplate.jsx # Template mẫu
 │
 ├── context/                   # React Context Providers
-│   ├── AuthContext.tsx       # Authentication state
-│   └── ToastContext.tsx      # Toast notifications
+│   ├── AuthContext.jsx       # Authentication state
+│   └── ToastContext.jsx      # Toast notifications
 │
 ├── hooks/                     # Custom React Hooks
-│   ├── useSocket.ts          # Socket.IO hook
-│   ├── useRoomState.ts       # Room state management
-│   ├── useDebateTimer.ts     # Timer logic
-│   └── useToast.ts           # Toast hook
+│   ├── useSocket.js          # Socket.IO hook
+│   ├── useRoomState.js       # Room state management
+│   ├── useDebateTimer.js     # Timer logic
+│   └── useToast.js           # Toast hook
 │
 ├── services/                   # API Services
-│   ├── api.ts                # Axios instance & API calls
-│   └── auth.ts               # Authentication service
+│   ├── api.js                # Axios instance & API calls
+│   └── auth.js               # Authentication service
 │
 ├── socket/                     # Socket.IO
-│   └── socket.ts             # Socket connection setup
+│   └── socket.js             # Socket connection setup
 │
 ├── styles/                     # CSS Files
 │   ├── globals.css           # Global styles
@@ -106,16 +106,16 @@ frontend/src/
 ├── utils/                      # Utilities
 │   └── designSystem.md       # Design system docs
 │
-└── types/                      # TypeScript types
+└── types/                      # Shared types
 ```
 
 ### Luồng Hoạt Động Frontend
 
-1. **Entry Point** (`index.tsx`):
+1. **Entry Point** (`index.jsx`):
    - Setup React root
    - Wrap app với `AuthProvider` và `ToastProvider`
 
-2. **Routing** (`App.tsx`):
+2. **Routing** (`App.jsx`):
    - Định nghĩa tất cả routes
    - Mỗi route được wrap trong `PageWrapper`
 
@@ -151,46 +151,46 @@ frontend/src/
 
 ```
 backend/src/
-├── main.ts                    # Entry point, bootstrap app
-├── app.module.ts              # Root module
-├── app.controller.ts          # Root controller
-├── app.service.ts             # Root service
+├── main.js                    # Entry point, bootstrap app
+├── app.module.js              # Root module
+├── app.controller.js          # Root controller
+├── app.service.js             # Root service
 │
 ├── auth/                      # Authentication Module
-│   ├── auth.module.ts
-│   ├── auth.controller.ts    # Login, Register endpoints
-│   └── auth.service.ts       # Auth logic, JWT
+│   ├── auth.module.js
+│   ├── auth.controller.js    # Login, Register endpoints
+│   └── auth.service.js       # Auth logic, JWT
 │
 ├── users/                     # Users Module
-│   ├── users.module.ts
-│   ├── users.controller.ts   # User CRUD
-│   └── users.service.ts       # User business logic
+│   ├── users.module.js
+│   ├── users.controller.js   # User CRUD
+│   └── users.service.js       # User business logic
 │
 ├── rooms/                     # Rooms Module
-│   ├── rooms.module.ts
-│   ├── rooms.controller.ts   # Room management
-│   └── rooms.service.ts       # Room logic
+│   ├── rooms.module.js
+│   ├── rooms.controller.js   # Room management
+│   └── rooms.service.js       # Room logic
 │
 ├── topics/                    # Topics Module
-│   ├── topics.module.ts
-│   ├── topics.controller.ts  # Topic CRUD
-│   └── topics.service.ts     # Topic logic
+│   ├── topics.module.js
+│   ├── topics.controller.js  # Topic CRUD
+│   └── topics.service.js     # Topic logic
 │
 ├── debates/                   # Debates Module
-│   ├── debates.module.ts
-│   ├── debates.controller.ts # Debate management
-│   └── debates.service.ts    # Debate logic
+│   ├── debates.module.js
+│   ├── debates.controller.js # Debate management
+│   └── debates.service.js    # Debate logic
 │
 ├── votes/                     # Votes Module
-│   ├── votes.module.ts
-│   ├── votes.controller.ts   # Voting endpoints
-│   └── votes.service.ts      # Vote logic
+│   ├── votes.module.js
+│   ├── votes.controller.js   # Voting endpoints
+│   └── votes.service.js      # Vote logic
 │
 ├── chat/                      # Chat Module
-│   └── chat.module.ts        # Chat functionality
+│   └── chat.module.js        # Chat functionality
 │
 ├── events/                    # WebSocket Gateway
-│   └── events.gateway.ts     # Socket.IO events
+│   └── events.gateway.js     # Socket.IO events
 │
 └── database/
     └── schema.sql            # Database schema
@@ -358,7 +358,7 @@ npm start  # Port 3001
 
 - `frontend/src/utils/designSystem.md`: Design system guide
 - `frontend/src/COMPONENT_TEMPLATE_GUIDE.md`: Component template
-- Component `.example.tsx` files: Usage examples
+- Component `.example.jsx` files: Usage examples
 
 ---
 

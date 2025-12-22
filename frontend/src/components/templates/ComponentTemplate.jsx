@@ -159,7 +159,7 @@ const ComponentTemplate = ({
 //   isLoading: PropTypes.bool,
 // };
 
-// TypeScript alternative (if using TypeScript):
+// JSDoc alternative:
 // interface ComponentTemplateProps {
 //   title?: string;
 //   subtitle?: string;

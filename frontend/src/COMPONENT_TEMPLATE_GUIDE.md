@@ -208,5 +208,5 @@ Xem `src/utils/designSystem.md` để xem documentation đầy đủ về design
 - [ ] Smooth transitions và animations
 - [ ] Comments cho các phần quan trọng
 - [ ] Mock data nếu cần
-- [ ] PropTypes hoặc TypeScript types (optional)
+- [ ] PropTypes hoặc JSDoc types (optional)
 
