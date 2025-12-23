@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/auth/AuthLayout';
+import { register as registerService } from '../services/auth';
 
 const Register = () => {
   // const navigate = useNavigate(); // TODO: Use for navigation after successful registration
@@ -16,10 +17,9 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      // TODO: Replace with actual API call
-      console.log('Register data:', data);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log('Register data (sending):', data);
+      const res = await registerService(data.username, data.email, data.password);
+      console.log('Registration response:', res);
       // Navigate to login or dashboard after successful registration
       // navigate('/login');
     } catch (error) {
