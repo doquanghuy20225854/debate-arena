@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +18,19 @@ export class AuthController {
 			statusCode: HttpStatus.CREATED,
 			message: 'User registered successfully',
 			data: user,
+		};
+	}
+
+	@Post('login')
+	@HttpCode(HttpStatus.OK)
+	@UsePipes(new ValidationPipe({ whitelist: true }))
+	async login(@Body() dto: LoginDto) {
+		console.log('AuthController.login attempt', dto.email);
+		const result = await this.authService.login(dto);
+		return {
+			statusCode: HttpStatus.OK,
+			message: 'Login successful',
+			data: result,
 		};
 	}
 }

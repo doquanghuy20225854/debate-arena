@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/auth/AuthLayout';
-import { register as registerService } from '../services/auth';
+import { register as registerService, login as loginService } from '../services/auth';
+import { AuthContext } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 
 const Register = () => {
   // const navigate = useNavigate(); // TODO: Use for navigation after successful registration
@@ -15,15 +17,33 @@ const Register = () => {
 
   const password = watch('password');
 
+  const { login } = useContext(AuthContext);
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
       console.log('Register data (sending):', data);
       const res = await registerService(data.username, data.email, data.password);
       console.log('Registration response:', res);
-      // Navigate to login or dashboard after successful registration
-      // navigate('/login');
+      toast.success('Đăng ký thành công');
+      // Optionally auto-login: call login API and set auth state
+      try {
+        const loginRes = await loginService(data.email, data.password);
+        if (loginRes?.accessToken) {
+          localStorage.setItem('accessToken', loginRes.accessToken);
+        }
+        login(loginRes.user);
+        toast.success('Đã đăng nhập tự động');
+        navigate('/');
+      } catch (err) {
+        // If auto-login fails, redirect to login page
+        console.warn('Auto-login after register failed', err);
+        navigate('/login');
+      }
     } catch (error) {
       console.error('Registration error:', error);
+      toast.error(error?.response?.data?.message || 'Đăng ký thất bại');
     }
   };
 

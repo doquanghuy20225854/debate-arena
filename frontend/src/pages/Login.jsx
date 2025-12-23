@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/auth/AuthLayout';
+import { login as loginService } from '../services/auth';
+import { AuthContext } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 
 const Login = () => {
-  // const navigate = useNavigate(); // TODO: Use for navigation after successful login
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+  const { login } = useContext(AuthContext);
+  const toast = useToast();
 
   const onSubmit = async (data) => {
     try {
-      // TODO: Replace with actual API call
-      console.log('Login data:', data);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // Navigate to home or dashboard after successful login
-      // navigate('/');
+      console.log('Login data (sending):', data);
+      const res = await loginService(data.email, data.password);
+      console.log('Login success', res);
+      // save token (for now localStorage; consider httpOnly cookie in production)
+      if (res?.accessToken) {
+        localStorage.setItem('accessToken', res.accessToken);
+      }
+      // update auth context
+      login(res.user);
+      toast.success('Đăng nhập thành công');
+      navigate('/');
     } catch (error) {
       console.error('Login error:', error);
+      toast.error(error?.response?.data?.message || 'Đăng nhập thất bại');
     }
   };
 
