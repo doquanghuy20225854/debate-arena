@@ -1,0 +1,147 @@
+# Marketplace Demo (Customer / Seller / Admin)
+
+Project này được hoàn thiện từ skeleton ban đầu, bám theo các Use Case mà bạn đưa ra:
+
+- **Customer-facing**: browse sản phẩm, giỏ hàng, checkout, đơn hàng, tracking, đánh giá...
+- **Seller Center**: quản lý shop, sản phẩm, tồn kho, xử lý đơn hàng...
+- **Admin Console**: quản trị user, duyệt seller, kiểm duyệt sản phẩm, giám sát đơn...
+
+> Đây là **project demo/learning** (mock Payment/Shipping), tập trung vào luồng nghiệp vụ + cấu trúc code.
+
+## 1) Chạy Backend (Express + Prisma + MySQL)
+
+### Yêu cầu
+- Docker + Docker Compose
+
+### Chạy
+```bash
+cd be
+docker compose up -d --build
+```
+
+Backend mặc định chạy: `http://localhost:8080`
+
+Trong `docker-compose.yml` mặc định:
+- Backend sẽ tự chạy `prisma migrate deploy` mỗi lần container khởi động.
+- `AUTO_SEED=true` → tự chạy `prisma/seed.js` để tạo dữ liệu demo.
+
+> Nếu bạn muốn reset sạch database: `docker compose down -v` rồi `docker compose up -d --build`.
+
+## 2) Chạy Frontend (Vite + React)
+
+> Frontend **không dùng Tailwind** (đã bake CSS sẵn vào `src/styles/app.css`). Bạn chỉ cần `npm install` và chạy Vite.
+
+```bash
+cd fe
+npm install
+npm run dev
+```
+
+Frontend: `http://localhost:5173`
+
+Vite đã proxy `/api` và `/uploads` sang backend `http://localhost:8080`.
+
+## 2.1) Upload avatar/logo & import sản phẩm bằng Excel
+
+### Upload ảnh đại diện (customer)
+- Endpoint: **POST** `/api/customer/profile/avatar`
+- Body: `multipart/form-data` với field **avatar**
+- Response: trả về `user.avatarUrl` dạng `/uploads/avatars/...`
+
+### Upload logo shop (seller)
+- Endpoint: **POST** `/api/seller/shop/logo`
+- Body: `multipart/form-data` với field **shopLogo**
+- Response: trả về `shop.logoUrl` dạng `/uploads/shops/...`
+
+### Import sản phẩm qua Excel (seller)
+- Tải file mẫu: **GET** `/api/seller/products/import-template`
+- Import: **POST** `/api/seller/products/import-excel?mode=upsert|replace` (multipart, field **file**)
+  - `upsert` (mặc định): thêm mới / cập nhật theo `skuCode` (không ảnh hưởng sản phẩm khác)
+  - `replace`: ẩn toàn bộ sản phẩm hiện có của shop (không xoá dữ liệu), sau đó import lại từ file
+- Quy tắc: nếu **skuCode** trùng trong shop → cập nhật sản phẩm/SKU; không trùng → tạo mới.
+
+## 3) Tài khoản demo (đã seed)
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@shop.local | Admin@123 |
+| CS | cs@shop.local | Cs@12345 |
+| Seller | seller@shop.local | Seller@123 |
+| Customer | customer@shop.local | Customer@123 |
+
+> Lưu ý: **Login API dùng key `username`** (có thể nhập *email hoặc username*).
+
+Ví dụ Register:
+```bash
+curl -X POST http://localhost:8080/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"ep123","email":"ep123@gmail.com","password":"Abc@12345","firstName":"EP"}'
+```
+
+Ví dụ Login:
+```bash
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"customer@shop.local","password":"Customer@123"}'
+```
+
+## 4) Route UI demo
+
+- Public: `/`, `/products`, `/p/:slug`, `/cart`
+- Customer (cần login): `/checkout`, `/orders`, `/orders/:code`, `/profile`
+- Open shop (cần login): `/open-shop`
+- Seller (role SELLER): `/seller`
+  - Kho hàng (gộp Sản phẩm + Tồn kho): `/seller/warehouse` (route cũ `/seller/products` vẫn hoạt động)
+- Admin/CS (role ADMIN/CS): `/admin`
+
+## 5) API chính (tóm tắt)
+
+### Auth
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `POST /api/auth/change-password`
+- `POST /api/auth/forgot-password`
+- `POST /api/auth/reset-password`
+- `POST /api/auth/seller/apply`
+
+### Public
+- `GET /api/public/home`
+- `GET /api/public/categories`
+- `GET /api/public/products?q=&category=&sort=&minPrice=&maxPrice=&minRating=`
+- `GET /api/public/products/:slug`
+- `GET /api/public/products/:productId/reviews`
+- `GET /api/public/shops/:slug`
+
+### Customer
+- `GET/POST/PUT/DELETE /api/customer/addresses`
+- `GET/POST/PATCH/DELETE /api/customer/cart/...`
+- `POST /api/customer/checkout`
+- `GET /api/customer/orders`
+- `GET /api/customer/orders/:code`
+- `GET /api/customer/orders/:code/tracking`
+- `POST /api/customer/orders/:code/confirm-received`
+- `POST /api/customer/orders/:code/cancel-request`
+- `POST /api/customer/orders/:code/return-request`
+- `POST /api/customer/orders/:code/dispute`
+- Chat: `GET/POST /api/customer/orders/:code/chat`
+- Reviews: `POST /api/customer/reviews/product/:productId`, `PUT/DELETE /api/customer/reviews/:id`, `POST /api/customer/reviews/:id/report`
+
+### Seller
+- Shop: `GET/PUT /api/seller/shop`
+- Products: `GET/POST/PUT /api/seller/products`, `POST /api/seller/products/:id/visibility` (ACTIVE/HIDDEN/OOS)
+- Orders: `GET /api/seller/orders`, `POST /api/seller/orders/:code/confirm`, `.../pack`, `.../create-shipment`
+- Cancel/Return: `GET /api/seller/cancel-requests`, `.../cancel-approve`, `GET /api/seller/return-requests`, ...
+- Analytics: `GET /api/seller/analytics/summary`
+
+### Admin
+- Users: `GET /api/admin/users`, `PUT /api/admin/users/:id/role`, `PUT /api/admin/users/:id/block`
+- Sellers: `GET /api/admin/sellers`, `POST /api/admin/sellers/:userId/approve|reject`
+- Categories: CRUD `/api/admin/categories`
+- Products moderation: `GET /api/admin/products`, `PUT /api/admin/products/:id/status`
+- Orders: `GET /api/admin/orders`, `POST /api/admin/orders/:code/force-cancel`
+- Audit logs: `GET /api/admin/audit`
+
+---
+
+Nếu bạn muốn mình **map 1-1** từng Use Case trong UML sang API endpoint/flow cụ thể (sequence + state machine), nói mình biết: mình sẽ bổ sung file tài liệu `/docs` (markdown) và/hoặc Swagger.

@@ -1,0 +1,133 @@
+/* Auth pages (Login/Register) - shared */
+
+.auth-page__container{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-card{
+  width: min(420px, 100%);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card__title{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.auth-card__subtitle{
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+.auth-card__alert{
+  margin-top: 14px;
+  border-radius: 14px;
+  border: 1px solid #fee2e2;
+  background: #fef2f2;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.auth-card__alert--error{ color: #b91c1c; }
+
+.auth-form{
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.auth-form__field{
+  display: grid;
+  gap: 6px;
+}
+
+.auth-form__label{ margin: 0; }
+
+.auth-form__submit{
+  width: 100%;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.auth-card__footer{
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.auth-card__footerLink{
+  color: #0f172a;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* Password strength */
+.auth-strength{
+  margin-top: 10px;
+}
+
+.auth-strength__row{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.auth-strength__label{
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.auth-strength__bar{
+  margin-top: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.auth-strength__barFill{
+  height: 100%;
+  background: #0f172a;
+}
+
+/* Tips */
+.auth-tips{
+  margin-top: 18px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 14px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.auth-tips__title{
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.auth-tips__list{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.auth-page{
+  padding: 28px 0;
+}
+
+.auth-strength__text{
+  font-size: 13px;
+}
+
+.auth-strength__hint{
+  font-size: 12px;
+  margin-top: 2px;
+}
